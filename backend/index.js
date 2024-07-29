@@ -18,10 +18,6 @@ async function testDbConnection() {
 getPgVersion();
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
 app.route("/boats").get(getAllBoats);
 app.route("/boats/:id").get(getOneBoat);
 
