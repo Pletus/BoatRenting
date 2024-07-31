@@ -1,11 +1,16 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 require("dotenv").config();
 const { getPgVersion, pool } = require("./connect.js");
 
 const PORT = process.env.PGPORT || 8000;
 
-const { getAllBoats, getOneBoat } = require("./controllers/boats.js");
+const {
+  getAllBoats,
+  getOneBoat,
+  searchBoats,
+} = require("./controllers/boats.js");
 
 async function testDbConnection() {
   try {
@@ -17,8 +22,9 @@ async function testDbConnection() {
 
 getPgVersion();
 app.use(express.json());
+app.use(cors())
 
-app.route("/boats").get(getAllBoats);
+app.route("/boats").get(getAllBoats).post(searchBoats);
 app.route("/boats/:id").get(getOneBoat);
 
 app.listen(PORT, () =>
