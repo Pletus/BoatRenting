@@ -34,12 +34,10 @@ function Layout() {
         ? prev.filter((type) => type !== value)
         : [...prev, value]
     );
-    console.log(selectedTypes)
   };
 
   const handleLocationChange = (event) => {
     setSelectedLocation(event.target.value);
-    console.log(selectedLocation);
   };
 
   const handleDateChange = (event) => {
@@ -48,16 +46,15 @@ function Layout() {
       ...prev,
       [name]: value,
     }));
-    console.log(dateRange);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log("Selected Types:", selectedTypes);
+    console.log("Selected Location:", selectedLocation);
+
     try {
-      const response = await searchBoats(
-        selectedTypes,
-        selectedLocation
-      );
+      const response = await searchBoats(selectedTypes, selectedLocation);
       setBoats(response);
       console.log(response);
     } catch (error) {
@@ -65,15 +62,15 @@ function Layout() {
     }
   };
 
-  const searchBoats = async (types, locations) => {
+  const searchBoats = async (type, locations) => {
     const response = await fetch("http://localhost:5432/boats", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        types,
-        locations,
+        type: type,
+        locations: locations, // Asegúrate de que `locations` sea un array
       }),
     });
 
@@ -110,7 +107,7 @@ function Layout() {
         {isFormVisible && (
           <div
             id="bookingForm"
-            className="absolute top-16 right-0 bg-blue-700 text-white p-4 w-80 border border-gray-600 rounded-lg shadow-lg"
+            className="absolute p-12 left-0 bg-blue-700 text-white p-4 w-80 border border-gray-600 rounded-lg shadow-lg"
           >
             <button
               className="absolute top-2 right-2"
@@ -131,17 +128,15 @@ function Layout() {
                 ></path>
               </svg>
             </button>
-            <form onSubmit={handleSubmit}>
-              <div>
+            <form className="flex gap-12" onSubmit={handleSubmit}>
+              <div className="flex flex-col">
                 <input
                   type="checkbox"
                   id="Boat"
-                  value="Boat"
+                  value="boat"
                   onChange={handleTypeChange}
                 />
                 <label htmlFor="Boat">Boat</label>
-              </div>
-              <div>
                 <input
                   type="checkbox"
                   id="Catamaran"
@@ -149,8 +144,6 @@ function Layout() {
                   onChange={handleTypeChange}
                 />
                 <label htmlFor="Catamaran">Catamaran</label>
-              </div>
-              <div>
                 <input
                   type="checkbox"
                   id="Fragata"
@@ -158,8 +151,6 @@ function Layout() {
                   onChange={handleTypeChange}
                 />
                 <label htmlFor="Fragata">Fragata</label>
-              </div>
-              <div>
                 <input
                   type="checkbox"
                   id="Sailing Vessel"
@@ -167,8 +158,6 @@ function Layout() {
                   onChange={handleTypeChange}
                 />
                 <label htmlFor="Sailing Vessel">Sailing Vessel</label>
-              </div>
-              <div>
                 <input
                   type="checkbox"
                   id="Yacht"
@@ -180,14 +169,24 @@ function Layout() {
               <div>
                 <label htmlFor="location">Location</label>
                 <select id="location" onChange={handleLocationChange}>
-                  <option value="">Select a location</option>
-                  <option value="Cannes">Cannes</option>
-                  <option value="Port Vell">Port Vell</option>
-                  <option value="Marina Ibiza">Marina Ibiza</option>
-                  <option value="Port Adriano">Port Adriano</option>
+                  <option className="text-black" value="">
+                    Select a location
+                  </option>
+                  <option className="text-black" value="Cannes">
+                    Cannes
+                  </option>
+                  <option className="text-black" value="Port Vell">
+                    Port Vell
+                  </option>
+                  <option className="text-black" value="Marina Ibiza">
+                    Marina Ibiza
+                  </option>
+                  <option className="text-black" value="Port Adriano">
+                    Port Adriano
+                  </option>
                 </select>
               </div>
-              <div>
+              <div className="flex flex-col">
                 <label htmlFor="start">Start Date</label>
                 <input
                   type="date"
@@ -196,8 +195,6 @@ function Layout() {
                   value={dateRange.start}
                   onChange={handleDateChange}
                 />
-              </div>
-              <div>
                 <label htmlFor="end">End Date</label>
                 <input
                   type="date"

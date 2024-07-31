@@ -24,24 +24,23 @@ const getOneBoat = (req, res) => {
 const searchBoats = async (req, res) => {
   const { type, locations } = req.body;
 
-  // Convertir `locations` a un array si no es null
+  // Asegúrate de que type y locations sean arrays
+  const typeArray = Array.isArray(type) ? type : [type];
   const locationArray = Array.isArray(locations) ? locations : [locations];
 
-  // Imprimir los valores para depuración
-  console.log("Search parameters:", { type, locationArray });
+  console.log("Search parameters:", { typeArray, locationArray });
 
   const query = `
     SELECT * FROM boats
-    WHERE type = $1
-    AND locations && $2::text[];
+    WHERE
+      (type = ANY($1::text[])) AND
+      (locations && $2::text[]);
   `;
 
-  // Parámetros para la consulta
-  const values = [type, locationArray];
+  const values = [typeArray, locationArray];
 
   try {
     const result = await pool.query(query, values);
-
     res.status(200).json(result.rows);
   } catch (error) {
     console.error("Error searching boats by type:", error);
