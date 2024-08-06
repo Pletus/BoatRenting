@@ -109,11 +109,10 @@ function Layout() {
             </button>
           </li>
         </ul>
-
         {isFormVisible && (
           <div
             id="bookingForm"
-            className="absolute p-12 left-0 bg-blue-700 text-white p-4 w-80 border border-gray-600 rounded-lg shadow-lg"
+            className="absolute md:left-24 mt-10 pt-20 px-10 bg-white text-black p-4 border border-black rounded-lg complex-shadow"
           >
             <button
               className="absolute top-2 right-2"
@@ -134,62 +133,16 @@ function Layout() {
                 ></path>
               </svg>
             </button>
-            <form className="flex gap-12" onSubmit={handleSubmit}>
-              <div className="dropdown">
-                <button onClick={handleToggle} className="dropdown-button">
-                  Select Types
-                </button>
-                {isOpen && (
-                  <div className="dropdown-content">
-                    <div>
-                      <input
-                        type="checkbox"
-                        id="Boat"
-                        value="boat"
-                        onChange={handleTypeChange}
-                      />
-                      <label htmlFor="Boat">Boat</label>
-                    </div>
-                    <div>
-                      <input
-                        type="checkbox"
-                        id="Catamaran"
-                        value="catamaran"
-                        onChange={handleTypeChange}
-                      />
-                      <label htmlFor="Catamaran">Catamaran</label>
-                    </div>
-                    <div>
-                      <input
-                        type="checkbox"
-                        id="Fragata"
-                        value="fragata"
-                        onChange={handleTypeChange}
-                      />
-                      <label htmlFor="Fragata">Fragata</label>
-                    </div>
-                    <div>
-                      <input
-                        type="checkbox"
-                        id="Sailing Vessel"
-                        value="velero"
-                        onChange={handleTypeChange}
-                      />
-                      <label htmlFor="Sailing Vessel">Sailing Vessel</label>
-                    </div>
-                    <div>
-                      <input
-                        type="checkbox"
-                        id="Yacht"
-                        value="yate"
-                        onChange={handleTypeChange}
-                      />
-                      <label htmlFor="Yacht">Yacht</label>
-                    </div>
-                  </div>
-                )}
-              </div>
-              <div>
+            <h4 className="max-w-96 pl-5 mb-10 text-base leading-loose">
+              Choose a port, select your dates, pick the perfect boat model, and
+              embark on your unforgettable adventure. Enjoy a seamless booking
+              experience and set sail with ease!
+            </h4>
+            <form
+              className="flex flex-col justify-center items-center gap-12"
+              onSubmit={handleSubmit}
+            >
+              <div className="input-borders p-1">
                 <select
                   className="text-black"
                   id="location"
@@ -236,25 +189,83 @@ function Layout() {
                   </option>
                 </select>
               </div>
-              <div className="flex flex-col">
-                <label htmlFor="start">Start Date</label>
-                <input
-                  className="text-black"
-                  type="date"
-                  id="start"
-                  name="start"
-                  value={dateRange.start}
-                  onChange={handleDateChange}
-                />
-                <label htmlFor="end">End Date</label>
-                <input
-                  className="text-black"
-                  type="date"
-                  id="end"
-                  name="end"
-                  value={dateRange.end}
-                  onChange={handleDateChange}
-                />
+              <div className="flex flex-col gap-4 md:flex-row">
+                <div className="flex flex-col">
+                  <label htmlFor="start">Start Date</label>
+                  <input
+                    className="text-black input-borders p-1"
+                    type="date"
+                    id="start"
+                    name="start"
+                    value={dateRange.start}
+                    onChange={handleDateChange}
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <label htmlFor="end">End Date</label>
+                  <input
+                    className="text-black input-borders p-1"
+                    type="date"
+                    id="end"
+                    name="end"
+                    value={dateRange.end}
+                    onChange={handleDateChange}
+                  />
+                </div>
+              </div>
+              <div className="dropdown">
+                <button onClick={handleToggle} className="input-borders p-2">
+                  Select Types
+                </button>
+                {isOpen && (
+                  <div className="dropdown-content">
+                    <div>
+                      <label htmlFor="Boat">Boat</label>
+                      <input
+                        type="checkbox"
+                        id="Boat"
+                        value="boat"
+                        onChange={handleTypeChange}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="Catamaran">Catamaran</label>
+                      <input
+                        type="checkbox"
+                        id="Catamaran"
+                        value="catamaran"
+                        onChange={handleTypeChange}
+                      />
+                    </div>
+                    <div>
+                    <label htmlFor="Fragata">Fragata</label>
+                      <input
+                        type="checkbox"
+                        id="Fragata"
+                        value="fragata"
+                        onChange={handleTypeChange}
+                      />
+                    </div>
+                    <div>
+                    <label htmlFor="Sailing Vessel">Sailing Vessel</label>
+                      <input
+                        type="checkbox"
+                        id="Sailing Vessel"
+                        value="velero"
+                        onChange={handleTypeChange}
+                      />
+                    </div>
+                    <div>
+                    <label htmlFor="Yacht">Yacht</label>
+                      <input
+                        type="checkbox"
+                        id="Yacht"
+                        value="yate"
+                        onChange={handleTypeChange}
+                      />                   
+                    </div>
+                  </div>
+                )}
               </div>
               <button type="submit">Search</button>
             </form>
