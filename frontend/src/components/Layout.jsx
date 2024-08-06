@@ -190,28 +190,56 @@ function Layout() {
                 )}
               </div>
               <div>
-                <label htmlFor="location">Location</label>
-                <select id="location" onChange={handleLocationChange}>
+                <select
+                  className="text-black"
+                  id="location"
+                  onChange={handleLocationChange}
+                >
                   <option className="text-black" value="">
                     Select a location
+                  </option>
+                  <option className="text-black" value="Antibes">
+                    Antibes
+                  </option>
+                  <option className="text-black" value="Barcelona">
+                    Barcelona
+                  </option>
+                  <option className="text-black" value="Cannes">
+                    Campania
                   </option>
                   <option className="text-black" value="Cannes">
                     Cannes
                   </option>
-                  <option className="text-black" value="Port Vell">
-                    Port Vell
+                  <option className="text-black" value="Capri">
+                    Capri
                   </option>
-                  <option className="text-black" value="Marina Ibiza">
-                    Marina Ibiza
+                  <option className="text-black" value="Cerdeña">
+                    Cerdeña
                   </option>
-                  <option className="text-black" value="Port Adriano">
-                    Port Adriano
+                  <option className="text-black" value="Ibiza">
+                    Ibiza
+                  </option>
+                  <option className="text-black" value="Liguria">
+                    Liguria
+                  </option>
+                  <option className="text-black" value="Mallorca">
+                    Mallorca
+                  </option>
+                  <option className="text-black" value="Marbella">
+                    Marbella
+                  </option>
+                  <option className="text-black" value="Niza">
+                    Niza
+                  </option>
+                  <option className="text-black" value="Saint-Tropez">
+                    Saint-Tropez
                   </option>
                 </select>
               </div>
               <div className="flex flex-col">
                 <label htmlFor="start">Start Date</label>
                 <input
+                  className="text-black"
                   type="date"
                   id="start"
                   name="start"
@@ -220,6 +248,7 @@ function Layout() {
                 />
                 <label htmlFor="end">End Date</label>
                 <input
+                  className="text-black"
                   type="date"
                   id="end"
                   name="end"
