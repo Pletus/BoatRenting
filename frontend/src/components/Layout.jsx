@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
+import "../App.css";
 
 function Layout() {
   const [selectedTypes, setSelectedTypes] = useState([]);
@@ -7,6 +8,11 @@ function Layout() {
   const [dateRange, setDateRange] = useState({ start: "", end: "" });
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [boats, setBoats] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -28,12 +34,12 @@ function Layout() {
   };
 
   const handleTypeChange = (event) => {
-    const { value } = event.target;
-    setSelectedTypes((prev) =>
-      prev.includes(value)
-        ? prev.filter((type) => type !== value)
-        : [...prev, value]
-    );
+    const { value, checked } = event.target;
+    if (checked) {
+      setSelectedTypes([...selectedTypes, value]);
+    } else {
+      setSelectedTypes(selectedTypes.filter((type) => type !== value));
+    }
   };
 
   const handleLocationChange = (event) => {
@@ -129,42 +135,59 @@ function Layout() {
               </svg>
             </button>
             <form className="flex gap-12" onSubmit={handleSubmit}>
-              <div className="flex flex-col">
-                <input
-                  type="checkbox"
-                  id="Boat"
-                  value="boat"
-                  onChange={handleTypeChange}
-                />
-                <label htmlFor="Boat">Boat</label>
-                <input
-                  type="checkbox"
-                  id="Catamaran"
-                  value="catamaran"
-                  onChange={handleTypeChange}
-                />
-                <label htmlFor="Catamaran">Catamaran</label>
-                <input
-                  type="checkbox"
-                  id="Fragata"
-                  value="fragata"
-                  onChange={handleTypeChange}
-                />
-                <label htmlFor="Fragata">Fragata</label>
-                <input
-                  type="checkbox"
-                  id="Sailing Vessel"
-                  value="velero"
-                  onChange={handleTypeChange}
-                />
-                <label htmlFor="Sailing Vessel">Sailing Vessel</label>
-                <input
-                  type="checkbox"
-                  id="Yacht"
-                  value="yate"
-                  onChange={handleTypeChange}
-                />
-                <label htmlFor="Yacht">Yacht</label>
+              <div className="dropdown">
+                <button onClick={handleToggle} className="dropdown-button">
+                  Select Types
+                </button>
+                {isOpen && (
+                  <div className="dropdown-content">
+                    <div>
+                      <input
+                        type="checkbox"
+                        id="Boat"
+                        value="boat"
+                        onChange={handleTypeChange}
+                      />
+                      <label htmlFor="Boat">Boat</label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        id="Catamaran"
+                        value="catamaran"
+                        onChange={handleTypeChange}
+                      />
+                      <label htmlFor="Catamaran">Catamaran</label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        id="Fragata"
+                        value="fragata"
+                        onChange={handleTypeChange}
+                      />
+                      <label htmlFor="Fragata">Fragata</label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        id="Sailing Vessel"
+                        value="velero"
+                        onChange={handleTypeChange}
+                      />
+                      <label htmlFor="Sailing Vessel">Sailing Vessel</label>
+                    </div>
+                    <div>
+                      <input
+                        type="checkbox"
+                        id="Yacht"
+                        value="yate"
+                        onChange={handleTypeChange}
+                      />
+                      <label htmlFor="Yacht">Yacht</label>
+                    </div>
+                  </div>
+                )}
               </div>
               <div>
                 <label htmlFor="location">Location</label>
