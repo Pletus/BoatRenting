@@ -10,6 +10,12 @@ function Layout() {
   const [boats, setBoats] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleRemoveType = (typeToRemove) => {
+    setSelectedTypes((prevState) =>
+      prevState.filter((type) => type !== typeToRemove)
+    );
+  };
+
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
@@ -36,9 +42,11 @@ function Layout() {
   const handleTypeChange = (event) => {
     const { value, checked } = event.target;
     if (checked) {
-      setSelectedTypes([...selectedTypes, value]);
+      setSelectedTypes((prevState) => [...prevState, value]);
     } else {
-      setSelectedTypes(selectedTypes.filter((type) => type !== value));
+      setSelectedTypes((prevState) =>
+        prevState.filter((type) => type !== value)
+      );
     }
   };
 
@@ -90,7 +98,7 @@ function Layout() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <nav className="text-white w-screen text-xl relative">
+      <nav className="nav text-white w-screen text-xl relative">
         <img src="https://via.placeholder.com/40" alt="Logo" />
         <ul className="flex space-x-4">
           <li>
@@ -112,7 +120,7 @@ function Layout() {
         {isFormVisible && (
           <div
             id="bookingForm"
-            className="absolute md:left-24 mt-10 pt-20 px-10 bg-white text-black p-4 border border-black rounded-lg complex-shadow"
+            className="absolute md:left-24 mt-8 pt-20 px-10 bg-white text-black p-4 input-borders complex-shadow"
           >
             <button
               className="absolute top-2 right-2"
@@ -133,7 +141,7 @@ function Layout() {
                 ></path>
               </svg>
             </button>
-            <h4 className="max-w-96 pl-5 mb-10 text-base leading-loose">
+            <h4 className="tc font-semibold max-w-96 pl-3 mb-10 text-base leading-loose">
               Choose a port, select your dates, pick the perfect boat model, and
               embark on your unforgettable adventure. Enjoy a seamless booking
               experience and set sail with ease!
@@ -144,56 +152,56 @@ function Layout() {
             >
               <div className="input-borders p-1">
                 <select
-                  className="text-black"
+                  className="tc font-semibold"
                   id="location"
                   onChange={handleLocationChange}
                 >
-                  <option className="text-black" value="">
-                    Select a location
-                  </option>
-                  <option className="text-black" value="Antibes">
+                  <option value="">Select a location</option>
+                  <option className="tc font-semibold" value="Antibes">
                     Antibes
                   </option>
-                  <option className="text-black" value="Barcelona">
+                  <option className="tc font-semibold" value="Barcelona">
                     Barcelona
                   </option>
-                  <option className="text-black" value="Cannes">
+                  <option className="tc font-semibold" value="Campania">
                     Campania
                   </option>
-                  <option className="text-black" value="Cannes">
+                  <option className="tc font-semibold" value="Cannes">
                     Cannes
                   </option>
-                  <option className="text-black" value="Capri">
+                  <option className="tc font-semibold" value="Capri">
                     Capri
                   </option>
-                  <option className="text-black" value="Cerdeña">
+                  <option className="tc font-semibold" value="Cerdeña">
                     Cerdeña
                   </option>
-                  <option className="text-black" value="Ibiza">
+                  <option className="tc font-semibold" value="Ibiza">
                     Ibiza
                   </option>
-                  <option className="text-black" value="Liguria">
+                  <option className="tc font-semibold" value="Liguria">
                     Liguria
                   </option>
-                  <option className="text-black" value="Mallorca">
+                  <option className="tc font-semibold" value="Mallorca">
                     Mallorca
                   </option>
-                  <option className="text-black" value="Marbella">
+                  <option className="tc font-semibold" value="Marbella">
                     Marbella
                   </option>
-                  <option className="text-black" value="Niza">
+                  <option className="tc font-semibold" value="Niza">
                     Niza
                   </option>
-                  <option className="text-black" value="Saint-Tropez">
+                  <option className="tc font-semibold" value="Saint-Tropez">
                     Saint-Tropez
                   </option>
                 </select>
               </div>
               <div className="flex flex-col gap-4 md:flex-row">
                 <div className="flex flex-col">
-                  <label htmlFor="start">Start Date</label>
+                  <label className="tc font-semibold" htmlFor="start">
+                    Start Date
+                  </label>
                   <input
-                    className="text-black input-borders p-1"
+                    className="tc input-borders p-1"
                     type="date"
                     id="start"
                     name="start"
@@ -202,9 +210,11 @@ function Layout() {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <label htmlFor="end">End Date</label>
+                  <label className="tc font-semibold" htmlFor="end">
+                    End Date
+                  </label>
                   <input
-                    className="text-black input-borders p-1"
+                    className="tc input-borders p-1"
                     type="date"
                     id="end"
                     name="end"
@@ -214,60 +224,108 @@ function Layout() {
                 </div>
               </div>
               <div className="dropdown">
-                <button onClick={handleToggle} className="input-borders p-2">
-                  Select Types
+                <button
+                  onClick={handleToggle}
+                  className="tc font-semibold input-borders p-2"
+                >
+                  Select Vessel Type
                 </button>
                 {isOpen && (
                   <div className="dropdown-content">
                     <div>
-                      <label htmlFor="Boat">Boat</label>
+                      <label className="tc font-semibold" htmlFor="Boat">
+                        Boat
+                      </label>
                       <input
                         type="checkbox"
                         id="Boat"
                         value="boat"
                         onChange={handleTypeChange}
+                        checked={selectedTypes.includes("boat")}
                       />
                     </div>
                     <div>
-                      <label htmlFor="Catamaran">Catamaran</label>
+                      <label className="tc font-semibold" htmlFor="Catamaran">
+                        Catamaran
+                      </label>
                       <input
                         type="checkbox"
                         id="Catamaran"
                         value="catamaran"
                         onChange={handleTypeChange}
+                        checked={selectedTypes.includes("catamaran")}
                       />
                     </div>
                     <div>
-                    <label htmlFor="Fragata">Fragata</label>
+                      <label className="tc font-semibold" htmlFor="Fragata">
+                        Fragata
+                      </label>
                       <input
                         type="checkbox"
                         id="Fragata"
                         value="fragata"
                         onChange={handleTypeChange}
+                        checked={selectedTypes.includes("fragata")}
                       />
                     </div>
                     <div>
-                    <label htmlFor="Sailing Vessel">Sailing Vessel</label>
+                      <label
+                        className="tc font-semibold"
+                        htmlFor="Sailing Vessel"
+                      >
+                        Sailing Vessel
+                      </label>
                       <input
                         type="checkbox"
                         id="Sailing Vessel"
                         value="velero"
                         onChange={handleTypeChange}
+                        checked={selectedTypes.includes("velero")}
                       />
                     </div>
                     <div>
-                    <label htmlFor="Yacht">Yacht</label>
+                      <label className="tc font-semibold" htmlFor="Yacht">
+                        Yacht
+                      </label>
                       <input
                         type="checkbox"
                         id="Yacht"
                         value="yate"
                         onChange={handleTypeChange}
-                      />                   
+                        checked={selectedTypes.includes("yate")}
+                      />
                     </div>
                   </div>
                 )}
+                <div className="flex mt-4 text-center flex-col gap-4 selected-types">
+                  {selectedTypes.map((type, index) => (
+                    <div className="relative input-borders border-green-400">
+                      <h2
+                        key={index}
+                        className="type-item"
+                        onClick={() => handleRemoveType(type)}
+                      >
+                        {type}
+                      </h2>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <button type="submit">Search</button>
+              <button
+                className="px-8 py-1 mb-4 input-borders btn-active bg-blue-800 bg-opacity-70 text-black flex self-end"
+                type="submit"
+              >
+                Search
+              </button>
+              <style jsx>{`
+                .type-item {
+                  cursor: pointer;
+                  transition: color 0.3s ease;
+                }
+                .type-item:hover {
+                  color: red;
+                }
+              `}</style>
             </form>
           </div>
         )}

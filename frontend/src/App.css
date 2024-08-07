@@ -1,5 +1,9 @@
-nav {
+.nav {
   background-color: #10255f;
+}
+
+.tc {
+  color: #133d87;
 }
 
 .complex-shadow {
