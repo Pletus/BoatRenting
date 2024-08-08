@@ -84,7 +84,7 @@ function Layout() {
       },
       body: JSON.stringify({
         type: type,
-        locations: locations, // Asegúrate de que `locations` sea un array
+        locations: locations,
       }),
     });
 
@@ -97,10 +97,9 @@ function Layout() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <nav className="nav text-white w-screen text-xl relative">
-        <img src="https://via.placeholder.com/40" alt="Logo" />
-        <ul className="flex space-x-4">
+    <div className="min-h-screen relative flex flex-col">
+      <nav className="nav sticky top-0 flex h-16 input-borders complex-shadow justify-between px-4 items-center text-white w-full text-xl relative">
+        <ul className="flex">
           <li>
             <a href="#home">Home</a>
           </li>
@@ -117,10 +116,16 @@ function Layout() {
             </button>
           </li>
         </ul>
+        <img src="https://via.placeholder.com/40" alt="Logo" />
+        <span className="flex gap-2">
+          <img src="https://via.placeholder.com/40" alt="" />
+          <img src="https://via.placeholder.com/40" alt="" />
+          <img src="https://via.placeholder.com/40" alt="" />
+        </span>
         {isFormVisible && (
           <div
             id="bookingForm"
-            className="absolute md:left-24 mt-8 pt-20 px-10 bg-white text-black p-4 input-borders complex-shadow"
+            className="absolute top-20 md:left-24 mt-2 pt-12 px-10 bg-white text-black p-4 input-borders complex-shadow"
           >
             <button
               className="absolute top-2 right-2"
@@ -141,13 +146,13 @@ function Layout() {
                 ></path>
               </svg>
             </button>
-            <h4 className="tc font-semibold max-w-96 pl-3 mb-10 text-base leading-loose">
+            <h4 className="tc font-semibold max-w-96 pl-3 mb-6 text-base leading-loose">
               Choose a port, select your dates, pick the perfect boat model, and
               embark on your unforgettable adventure. Enjoy a seamless booking
               experience and set sail with ease!
             </h4>
             <form
-              className="flex flex-col justify-center items-center gap-12"
+              className="flex flex-col justify-center items-center gap-10"
               onSubmit={handleSubmit}
             >
               <div className="input-borders p-1">
@@ -228,7 +233,7 @@ function Layout() {
                   onClick={handleToggle}
                   className="tc font-semibold input-borders p-2"
                 >
-                  Select Vessel Type
+                  Choose the type of vessel
                 </button>
                 {isOpen && (
                   <div className="dropdown-content">
@@ -297,12 +302,12 @@ function Layout() {
                     </div>
                   </div>
                 )}
-                <div className="flex mt-4 text-center flex-col gap-4 selected-types">
+                <div className="flex mt-4 text-center flex-wrap gap-4 selected-types">
                   {selectedTypes.map((type, index) => (
                     <div className="relative input-borders border-green-400">
                       <h2
                         key={index}
-                        className="type-item"
+                        className="type-item p-1"
                         onClick={() => handleRemoveType(type)}
                       >
                         {type}
@@ -312,7 +317,7 @@ function Layout() {
                 </div>
               </div>
               <button
-                className="px-8 py-1 mb-4 input-borders btn-active bg-blue-800 bg-opacity-70 text-black flex self-end"
+                className="px-8 btn-accent btn-bgc py-1 mb-4 input-borders btn text-black flex self-end"
                 type="submit"
               >
                 Search
@@ -330,7 +335,7 @@ function Layout() {
           </div>
         )}
       </nav>
-      <main className="flex-grow">
+      <main className="">
         <Outlet />
       </main>
       <footer></footer>

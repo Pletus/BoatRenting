@@ -1,7 +1,13 @@
 import React from "react";
+import hero from "../assets/hero.jpg";
 
 function Main() {
-  return <div className="">Main</div>;
+  return (
+    <section
+      className="h-screen w-full bg-cover"
+      style={{ backgroundImage: `url(${hero})` }}
+    ></section>
+  );
 }
 
 export default Main;
