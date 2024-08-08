@@ -1,5 +1,10 @@
 import { Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
+import {
+  IoMenuOutline,
+  IoCloseOutline,
+  IoMailOpenOutline,
+} from "react-icons/io5";
 import "../App.css";
 
 function Layout() {
@@ -9,6 +14,11 @@ function Layout() {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [boats, setBoats] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleMenuToggle = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   const handleRemoveType = (typeToRemove) => {
     setSelectedTypes((prevState) =>
@@ -98,30 +108,54 @@ function Layout() {
 
   return (
     <div className="min-h-screen relative flex flex-col">
-      <nav className="nav sticky top-0 flex h-16 input-borders complex-shadow justify-between px-4 items-center text-white w-full text-xl relative">
-        <ul className="flex">
-          <li>
-            <a href="#home">Home</a>
-          </li>
-          <li>
-            <a href="#services">Services</a>
-          </li>
-          <li>
-            <button
-              id="bookingButton"
-              className="focus:outline-none"
-              onClick={toggleFormVisibility}
-            >
-              Booking
-            </button>
-          </li>
-        </ul>
-        <img src="https://via.placeholder.com/40" alt="Logo" />
-        <span className="flex gap-2">
+      <nav className="nav sticky top-0 flex lg:grid lg:grid-cols-3 h-20 complex-shadow justify-between items-center lg:justify-items-center lg:content-center px-4 text-white w-full text-xl relative">
+        <button onClick={handleMenuToggle} className="lg:hidden text-3xl ml-2">
+          {isMenuOpen ? (
+            <IoCloseOutline size={24} />
+          ) : (
+            <IoMenuOutline size={24} />
+          )}
+        </button>
+        <div className="flex justify-self-start place-items-center">
+          <ul
+            className={`flex flex-col md:flex-row lg:flex-row text-white items-end lg:items-center transition-transform transform ${
+              isMenuOpen
+                ? "max-h-full opacity-100 pt-1 pr-3 gap-2 md:gap-4 md:items-center mt-2 md:pl-40 "
+                : "max-h-0 gap-6 2xl:gap-12 opacity-0 "
+            } overflow-hidden lg:overflow-visible lg:opacity-100 lg:max-h-full w-full lg:w-auto`}
+          >
+            <li>
+              <a href="#home">Home</a>
+            </li>
+            <li>
+              <a href="#vessels">Vessels</a>
+            </li>
+            <li>
+              <button
+                id="bookingButton"
+                className="focus:outline-none"
+                onClick={toggleFormVisibility}
+              >
+                Booking
+              </button>
+            </li>
+            <li>
+              <a href="#services">Contact</a>
+            </li>
+          </ul>
+        </div>
+        <div className="flex-grow text-center">
+          <img
+            className="inline-block"
+            src="https://via.placeholder.com/40"
+            alt="Logo"
+          />
+        </div>
+        <div className="flex gap-8 justify-self-end">
           <img src="https://via.placeholder.com/40" alt="" />
           <img src="https://via.placeholder.com/40" alt="" />
           <img src="https://via.placeholder.com/40" alt="" />
-        </span>
+        </div>
         {isFormVisible && (
           <div
             id="bookingForm"
