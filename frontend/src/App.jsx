@@ -1,17 +1,18 @@
-import { useState } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
+import { useState } from "react";
 import Layout from "./components/Layout";
 import Main from "./components/Main";
+import Booking from "./components/Booking";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [boats, setBoats] = useState([]);
 
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
+      <Route path="/" element={<Layout setBoats={setBoats} boats={boats} />}>
         <Route index element={<Main />} />
-        {/* <Route path="/items/:id" element={<OneItem />} /> */}
+        <Route path="/booking" element={<Booking boats={boats} />} />
       </Route>
     </Routes>
   );

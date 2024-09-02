@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { NavLink, useNavigate, Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {
   IoMenuOutline,
@@ -7,14 +7,14 @@ import {
 } from "react-icons/io5";
 import "../App.css";
 
-function Layout() {
+function Layout({ setBoats, boats }) {
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState("");
   const [dateRange, setDateRange] = useState({ start: "", end: "" });
   const [isFormVisible, setIsFormVisible] = useState(false);
-  const [boats, setBoats] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -74,13 +74,11 @@ function Layout() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Selected Types:", selectedTypes);
-    console.log("Selected Location:", selectedLocation);
 
     try {
       const response = await searchBoats(selectedTypes, selectedLocation);
       setBoats(response);
-      console.log(response);
+      navigate("/booking")
     } catch (error) {
       console.error("Error fetching boats:", error);
     }
@@ -125,7 +123,16 @@ function Layout() {
             } overflow-hidden lg:overflow-visible lg:opacity-100 lg:max-h-full w-full lg:w-auto`}
           >
             <li>
-              <a href="#home">Home</a>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                `${
+                  isActive ? "text-blue-500" : "text-white"
+                } transform transition-transform duration-200 flex md:hover:scale-125`
+              }
+            >
+              Home
+            </NavLink>
             </li>
             <li>
               <a href="#vessels">Vessels</a>
