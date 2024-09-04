@@ -17,6 +17,7 @@ function Layout({ setBoats, boats }) {
   const navigate = useNavigate();
 
   const handleMenuToggle = () => {
+    event.preventDefault();
     setIsMenuOpen(!isMenuOpen);
   };
 
@@ -78,7 +79,8 @@ function Layout({ setBoats, boats }) {
     try {
       const response = await searchBoats(selectedTypes, selectedLocation);
       setBoats(response);
-      navigate("/booking")
+      navigate("/booking");
+      setIsFormVisible(false);
     } catch (error) {
       console.error("Error fetching boats:", error);
     }
@@ -123,16 +125,16 @@ function Layout({ setBoats, boats }) {
             } overflow-hidden lg:overflow-visible lg:opacity-100 lg:max-h-full w-full lg:w-auto`}
           >
             <li>
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                `${
-                  isActive ? "text-blue-500" : "text-white"
-                } transform transition-transform duration-200 flex md:hover:scale-125`
-              }
-            >
-              Home
-            </NavLink>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `${
+                    isActive ? "text-blue-500" : "text-white"
+                  } transform transition-transform duration-200 flex md:hover:scale-125`
+                }
+              >
+                Home
+              </NavLink>
             </li>
             <li>
               <a href="#vessels">Vessels</a>
@@ -273,6 +275,7 @@ function Layout({ setBoats, boats }) {
                 <button
                   onClick={handleToggle}
                   className="tc font-semibold input-borders p-2"
+                  type="button"
                 >
                   Choose the type of vessel
                 </button>
