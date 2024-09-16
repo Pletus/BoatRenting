@@ -108,7 +108,7 @@ function Layout({ setBoats, boats }) {
 
   return (
     <div className="min-h-screen relative flex flex-col">
-      <nav className="nav sticky top-0 flex lg:grid lg:grid-cols-3 h-20 complex-shadow justify-between items-center lg:justify-items-center lg:content-center px-4 text-white w-full text-xl relative">
+      <nav className="nav top-0 flex lg:grid lg:grid-cols-3 h-20 complex-shadow justify-between items-center lg:justify-items-center lg:content-center px-4 text-white w-full text-xl relative">
         <button onClick={handleMenuToggle} className="lg:hidden text-3xl ml-2">
           {isMenuOpen ? (
             <IoCloseOutline size={24} />

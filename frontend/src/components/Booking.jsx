@@ -3,9 +3,9 @@ import React from "react";
 function Booking({ boats }) {
   console.log(boats);
   return (
-    <div className="min-h-lvh flex justify-center items-center">
+    <div className="min-h-lvh flex justify-end items-center pt-4">
       {boats.length > 0 ? (
-        <ul>
+        <ul className=" grid grid-cols-3 gap-4 px-4">
           {boats.map((boat, index) => (
             <li key={index}>
               <div className="card bg-base-100 w-96 shadow-xl">
@@ -18,12 +18,11 @@ function Booking({ boats }) {
                 <div className="card-body">
                   <h2 className="card-title">
                     {boat.type}
-                    <div className="badge badge-secondary">NEW</div>
                   </h2>
-                  <p>If a dog chews shoes whose shoes does he choose?</p>
+                  <p>{boat.description}</p>
                   <div className="card-actions justify-end">
-                    <div className="badge badge-outline">Fashion</div>
-                    <div className="badge badge-outline">Products</div>
+                    <div className="badge badge-outline">{boat.size} m</div>
+                    <div className="badge badge-outline">{boat.price} €/day</div>
                   </div>
                 </div>
               </div>
