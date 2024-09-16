@@ -1,14 +1,33 @@
 import React from "react";
 
 function Booking({ boats }) {
-  console.log(boats)
+  console.log(boats);
   return (
-    <div>
-      <h1>Selected Boats</h1>
+    <div className="min-h-lvh flex justify-center items-center">
       {boats.length > 0 ? (
         <ul>
           {boats.map((boat, index) => (
-            <li key={index}>{boat.type}</li>
+            <li key={index}>
+              <div className="card bg-base-100 w-96 shadow-xl">
+                <figure>
+                  <img
+                    src={boat.imagen}
+                    alt="Boat image"
+                  />
+                </figure>
+                <div className="card-body">
+                  <h2 className="card-title">
+                    {boat.type}
+                    <div className="badge badge-secondary">NEW</div>
+                  </h2>
+                  <p>If a dog chews shoes whose shoes does he choose?</p>
+                  <div className="card-actions justify-end">
+                    <div className="badge badge-outline">Fashion</div>
+                    <div className="badge badge-outline">Products</div>
+                  </div>
+                </div>
+              </div>
+            </li>
           ))}
         </ul>
       ) : (

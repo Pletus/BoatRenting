@@ -379,7 +379,7 @@ function Layout({ setBoats, boats }) {
           </div>
         )}
       </nav>
-      <main className="">
+      <main className="min-h-lvh">
         <Outlet />
       </main>
       <footer></footer>
