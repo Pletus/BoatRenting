@@ -288,9 +288,9 @@ function Layout({ setBoats, boats }) {
                       <input
                         type="checkbox"
                         id="Boat"
-                        value="boat"
+                        value="Boat"
                         onChange={handleTypeChange}
-                        checked={selectedTypes.includes("boat")}
+                        checked={selectedTypes.includes("Boat")}
                       />
                     </div>
                     <div>
@@ -300,21 +300,21 @@ function Layout({ setBoats, boats }) {
                       <input
                         type="checkbox"
                         id="Catamaran"
-                        value="catamaran"
+                        value="Catamaran"
                         onChange={handleTypeChange}
-                        checked={selectedTypes.includes("catamaran")}
+                        checked={selectedTypes.includes("Catamaran")}
                       />
                     </div>
                     <div>
-                      <label className="tc font-semibold" htmlFor="Fragata">
-                        Fragata
+                      <label className="tc font-semibold" htmlFor="Frigate">
+                      Frigate
                       </label>
                       <input
                         type="checkbox"
-                        id="Fragata"
-                        value="fragata"
+                        id="Frigate"
+                        value="Frigate"
                         onChange={handleTypeChange}
-                        checked={selectedTypes.includes("fragata")}
+                        checked={selectedTypes.includes("Frigate")}
                       />
                     </div>
                     <div>
@@ -327,9 +327,9 @@ function Layout({ setBoats, boats }) {
                       <input
                         type="checkbox"
                         id="Sailing Vessel"
-                        value="velero"
+                        value="Sailing Vessel"
                         onChange={handleTypeChange}
-                        checked={selectedTypes.includes("velero")}
+                        checked={selectedTypes.includes("Sailing Vessel")}
                       />
                     </div>
                     <div>
@@ -339,9 +339,9 @@ function Layout({ setBoats, boats }) {
                       <input
                         type="checkbox"
                         id="Yacht"
-                        value="yate"
+                        value="Yacht"
                         onChange={handleTypeChange}
-                        checked={selectedTypes.includes("yate")}
+                        checked={selectedTypes.includes("Yacht")}
                       />
                     </div>
                   </div>
