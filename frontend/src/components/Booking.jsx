@@ -9,11 +9,11 @@ function Booking({ boats }) {
           {boats.map((boat, index) => (
             <li key={index} className="flex flex-col">
               <div className="input-borders complex-shadow card bg-base-100 w-full max-w-sm mx-auto flex flex-col h-full">
-                <figure className="relative w-full h-72 overflow-hidden">
+                <figure className="w-full h-72 overflow-hidden">
                   <img
                     src={boat.imagen}
                     alt="Boat image"
-                    className="absolute inset-0 w-full h-full object-cover object-bottom"
+                    className="inset-0 w-full h-full object-cover object-bottom"
                   />
                 </figure>
                 <div className="card-body flex flex-col flex-grow">
@@ -23,9 +23,9 @@ function Booking({ boats }) {
                   </h2>
                   <p className="text-sm flex-grow">{boat.description}</p>
                   <div className="card-actions gap-2 justify-end mt-4">
-                    <div className="input-borders p-1 px-2">{boat.potencia} HP</div>
-                    <div className="input-borders p-1 px-2">{boat.size} M</div>
-                    <div className="input-borders p-1 px-2">
+                    <div className="hover:bg-sky-700 hover:ring-sky-700 hover:text-white input-borders p-1 px-2">{boat.potencia} HP</div>
+                    <div className="hover:bg-sky-700 hover:ring-sky-700 hover:text-white input-borders p-1 px-2">{boat.size} M</div>
+                    <div className="hover:bg-sky-700 hover:ring-sky-700 hover:text-white input-borders p-1 px-2">
                       {boat.price} €/Day
                     </div>
                   </div>
