@@ -326,10 +326,10 @@ function Layout({ setBoats, boats }) {
                       </label>
                       <input
                         type="checkbox"
-                        id="Sailing Vessel"
-                        value="Sailing Vessel"
+                        id="Sailing vessel"
+                        value="Sailing vessel"
                         onChange={handleTypeChange}
-                        checked={selectedTypes.includes("Sailing Vessel")}
+                        checked={selectedTypes.includes("Sailing vessel")}
                       />
                     </div>
                     <div>
