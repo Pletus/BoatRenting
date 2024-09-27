@@ -4,11 +4,9 @@ function Booking({ boats }) {
   // States for filtering boats
   const [price, setPrice] = useState(""); // Max price
   const [capacity, setCapacity] = useState(""); // Max capacity
-  const [minCapacity, setMinCapacity] = useState("");
-  const [maxCapacity, setMaxCapacity] = useState("");
-  const [motorPower, setMotorPower] = useState("");
-  const [minSize, setMinSize] = useState("");
-  const [maxSize, setMaxSize] = useState("");
+  const [motorPower, setMotorPower] = useState(""); // Max motor power
+  const [minSize, setMinSize] = useState(""); // Min size
+  const [maxSize, setMaxSize] = useState(""); // Max size
   const [hasSail, setHasSail] = useState(false);
 
   // Function to filter boats based on input values
@@ -17,24 +15,25 @@ function Booking({ boats }) {
       // Price filter using single 'price' state as max price
       const isPriceInRange = price === "" || boat.price <= price;
 
-      // Capacity filter using the new 'capacity' state
+      // Capacity filter using the 'capacity' state
       const isCapacityInRange = capacity === "" || boat.plazas <= capacity;
 
-      // Other filters remain the same
-      const isMotorPowerMatch =
-        motorPower === "" || boat.potencia === motorPower;
+      // Motor power filter using the 'motorPower' state
+      const isMotorPowerInRange =
+        motorPower === "" || boat.potencia <= motorPower;
 
+      // Size filter using the 'minSize' and 'maxSize' states
       const isSizeInRange =
         (minSize === "" || boat.size >= minSize) &&
         (maxSize === "" || boat.size <= maxSize);
 
-      const isSailMatch = !hasSail || boat.hasSail === hasSail;
+      const isSailMatch = !hasSail || boat.vela === hasSail;
 
       // Return true if the boat matches all conditions
       return (
         isPriceInRange &&
         isCapacityInRange &&
-        isMotorPowerMatch &&
+        isMotorPowerInRange &&
         isSizeInRange &&
         isSailMatch
       );
@@ -47,7 +46,7 @@ function Booking({ boats }) {
     <div className="min-h-screen grid grid-cols-1 md:grid-cols-4 gap-6 py-3 px-3">
       {/* Left column for filters */}
       <aside className="md:col-span-1 bg-white p-4 rounded-lg shadow">
-        <h2 className="text-xl font-semibold mb-4">Filter Boats</h2>
+        <h2 className="text-xl text-center pt-2 font-semibold mb-4">Filter Boats</h2>
 
         {/* Price Filter */}
         <div>
@@ -75,44 +74,34 @@ function Booking({ boats }) {
             className="w-full"
           />
           <span>{capacity} Person(s)</span>{" "}
-          {/* Display the selected capacity */}
         </div>
 
         {/* Motor Power Filter */}
-        <div className="mb-4">
-          <h3 className="text-lg font-medium">Motor Power (HP)</h3>
-          <select
+        <div>
+          <h3>Filter by Max Motor Power (HP):</h3>
+          <input
+            type="range"
+            min="0" // Minimum motor power
+            max="1000" // Maximum motor power
             value={motorPower}
-            onChange={(e) => setMotorPower(e.target.value)}
-            className="w-full mt-2 p-2 border rounded focus:outline-none focus:ring"
-          >
-            <option value="">Any</option>
-            <option value="50">50 HP</option>
-            <option value="100">100 HP</option>
-            <option value="150">150 HP</option>
-            <option value="200">200 HP</option>
-          </select>
+            onChange={(e) => setMotorPower(Number(e.target.value))}
+            className="w-full"
+          />
+          <span>{motorPower} HP</span>
         </div>
 
-        {/* Boat Size Filter */}
-        <div className="mb-4">
-          <h3 className="text-lg font-medium">Boat Size (Meters)</h3>
-          <div className="flex space-x-2 mt-2">
-            <input
-              type="number"
-              placeholder="Min"
-              value={minSize}
-              onChange={(e) => setMinSize(e.target.value)}
-              className="w-full p-2 border rounded focus:outline-none focus:ring"
-            />
-            <input
-              type="number"
-              placeholder="Max"
-              value={maxSize}
-              onChange={(e) => setMaxSize(e.target.value)}
-              className="w-full p-2 border rounded focus:outline-none focus:ring"
-            />
-          </div>
+        {/* Size Filter */}
+        <div>
+          <h3>Filter by Max Size (meters):</h3>
+          <input
+            type="range"
+            min="0" // Minimum size
+            max="30" // Maximum size
+            value={maxSize}
+            onChange={(e) => setMaxSize(Number(e.target.value))}
+            className="w-full"
+          />
+          <span>{maxSize} meters</span>
         </div>
 
         {/* Sail Filter */}
