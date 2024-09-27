@@ -7,10 +7,8 @@ import {
 } from "react-icons/io5";
 import "../App.css";
 
-function Layout({ setBoats, boats }) {
+function Layout({ setBoats, boats, dateRange, setDateRange, selectedLocation, setSelectedLocation}) {
   const [selectedTypes, setSelectedTypes] = useState([]);
-  const [selectedLocation, setSelectedLocation] = useState("");
-  const [dateRange, setDateRange] = useState({ start: "", end: "" });
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
