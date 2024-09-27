@@ -169,6 +169,7 @@ function Layout({ setBoats, boats }) {
           <div
             id="bookingForm"
             className="absolute top-20 md:left-24 mt-2 pt-12 px-10 bg-white text-black p-4 input-borders complex-shadow"
+            style={{ zIndex: 100 }}
           >
             <button
               className="absolute top-2 right-2"

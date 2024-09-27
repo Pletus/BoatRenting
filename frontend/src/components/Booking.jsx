@@ -1,7 +1,6 @@
 import React from "react";
 
 function Booking({ boats }) {
-  console.log(boats);
   return (
     <div className="min-h-lvh py-3 px-3">
       {boats.length > 0 ? (
@@ -35,7 +34,7 @@ function Booking({ boats }) {
           ))}
         </ul>
       ) : (
-        <p className="text-center text-gray-500">No boats selected yet.</p>
+        <p className="text-center text-2xl text-gray-500">No boats selected yet.</p>
       )}
     </div>
   );
