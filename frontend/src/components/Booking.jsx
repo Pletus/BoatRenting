@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 
 function Booking({ boats }) {
+  console.log(boats)
   // States for filtering boats
-  const [price, setPrice] = useState(""); // Max price
-  const [capacity, setCapacity] = useState(""); // Max capacity
-  const [motorPower, setMotorPower] = useState(""); // Max motor power
-  const [minSize, setMinSize] = useState(""); // Min size
-  const [maxSize, setMaxSize] = useState(""); // Max size
+  const [price, setPrice] = useState('');
+  const [capacity, setCapacity] = useState(''); 
+  const [motorPower, setMotorPower] = useState(''); 
+  const [minSize, setMinSize] = useState(''); 
+  const [maxSize, setMaxSize] = useState(''); 
   const [hasSail, setHasSail] = useState(false);
 
   // Function to filter boats based on input values
@@ -41,7 +42,7 @@ function Booking({ boats }) {
   };
 
   const filteredBoats = filterBoats();
-
+  console.log(filteredBoats)
   return (
     <div className="min-h-screen grid grid-cols-1 md:grid-cols-4 gap-4 py-3 px-2 md:px-6">
       {/* Left column for filters */}
@@ -71,7 +72,7 @@ function Booking({ boats }) {
             <input
               type="range"
               min="1" // Minimum number of people
-              max="20" // Set a reasonable maximum, adjust as needed
+              max="30" // Set a reasonable maximum, adjust as needed
               value={capacity}
               onChange={(e) => setCapacity(Number(e.target.value))}
               className="w-full"
