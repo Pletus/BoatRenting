@@ -40,8 +40,8 @@ function Booking({ boats }) {
       );
     });
   };
-
   const filteredBoats = filterBoats();
+
   return (
     <div className="min-h-screen grid grid-cols-1 md:grid-cols-4 gap-4 py-3 px-2 md:px-6">
       {/* Left column for filters */}
@@ -126,13 +126,13 @@ function Booking({ boats }) {
       <main className="md:col-span-3">
         {filteredBoats.length > 0 ? (
           <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {filteredBoats.map((boat, boats) => (
+            {filteredBoats.map((boat, index) => (
               <li
-                key={boats._id}
+                key={index}
                 className="flex flex-col input-borders complex-shadow"
               >
                 <div className="input-borders complex-shadow bg-base-100 w-full max-w-sm mx-auto flex flex-col h-full">
-                  <Link to={`/boats/${boats._id}`}>
+                  <Link to={`/boats/${boat.id}`}>
                     <figure className="w-full h-72 overflow-hidden">
                       <img
                         src={boat.imagen}
