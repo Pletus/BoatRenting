@@ -3,6 +3,7 @@ import { useState } from "react";
 import Layout from "./components/Layout";
 import Main from "./components/Main";
 import Booking from "./components/Booking";
+import OneBoat from "./components/OneBoat";
 import "./App.css";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
       >
         <Route index element={<Main />} />
         <Route path="/booking" element={<Booking boats={boats} />} />
+        <Route path="/boats/:id" element={<OneBoat />} />
       </Route>
     </Routes>
   );

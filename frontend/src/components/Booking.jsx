@@ -1,13 +1,13 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Booking({ boats }) {
-  console.log(boats)
   // States for filtering boats
-  const [price, setPrice] = useState('');
-  const [capacity, setCapacity] = useState(''); 
-  const [motorPower, setMotorPower] = useState(''); 
-  const [minSize, setMinSize] = useState(''); 
-  const [maxSize, setMaxSize] = useState(''); 
+  const [price, setPrice] = useState("");
+  const [capacity, setCapacity] = useState("");
+  const [motorPower, setMotorPower] = useState("");
+  const [minSize, setMinSize] = useState("");
+  const [maxSize, setMaxSize] = useState("");
   const [hasSail, setHasSail] = useState(false);
 
   // Function to filter boats based on input values
@@ -42,7 +42,6 @@ function Booking({ boats }) {
   };
 
   const filteredBoats = filterBoats();
-  console.log(filteredBoats)
   return (
     <div className="min-h-screen grid grid-cols-1 md:grid-cols-4 gap-4 py-3 px-2 md:px-6">
       {/* Left column for filters */}
@@ -99,8 +98,8 @@ function Booking({ boats }) {
             <h3>Filter by Max Size (meters):</h3>
             <input
               type="range"
-              min="0" // Minimum size
-              max="30" // Maximum size
+              min="0"
+              max="30"
               value={maxSize}
               onChange={(e) => setMaxSize(Number(e.target.value))}
               className="w-full"
@@ -127,16 +126,21 @@ function Booking({ boats }) {
       <main className="md:col-span-3">
         {filteredBoats.length > 0 ? (
           <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {filteredBoats.map((boat, index) => (
-              <li key={index} className="flex flex-col input-borders complex-shadow">
+            {filteredBoats.map((boat, boats) => (
+              <li
+                key={boats._id}
+                className="flex flex-col input-borders complex-shadow"
+              >
                 <div className="input-borders complex-shadow bg-base-100 w-full max-w-sm mx-auto flex flex-col h-full">
-                  <figure className="w-full h-72 overflow-hidden">
-                    <img
-                      src={boat.imagen}
-                      alt="Boat image"
-                      className="inset-0 w-full h-full object-cover object-bottom"
-                    />
-                  </figure>
+                  <Link to={`/boats/${boats._id}`}>
+                    <figure className="w-full h-72 overflow-hidden">
+                      <img
+                        src={boat.imagen}
+                        alt="Boat image"
+                        className="inset-0 w-full h-full object-cover object-bottom"
+                      />
+                    </figure>
+                  </Link>
                   <div className="card-body flex flex-col flex-grow">
                     <h2 className="pl-2 card-title text-lg font-semibold">
                       {boat.type}
