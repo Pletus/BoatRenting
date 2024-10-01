@@ -148,7 +148,6 @@ function Booking({ boats }) {
                         {boat.plazas} People
                       </p>
                     </h2>
-                    <p className="text-sm flex-grow">{boat.description}</p>
                     <div className="card-actions gap-2 justify-end mt-4">
                       <div className="hover:bg-sky-700 hover:ring-sky-700 hover:text-white input-borders p-1 px-2">
                         {boat.potencia} HP

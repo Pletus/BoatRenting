@@ -3,19 +3,37 @@ import { useParams } from "react-router-dom";
 
 function OneBoat() {
   const { id } = useParams();
-  const [boat, setBoat] = useState("");
+  const [boat, setBoat] = useState(null);
+  const [error, setError] = useState(null);
+console.log(boat)
 
   useEffect(() => {
     const getBoat = async () => {
       try {
-        const response = await fetch("http://localhost:5432/boats");
-        setBoat(response);
+        const response = await fetch(`http://localhost:5432/boats/${id}`);
+
+        if (!response.ok) {
+          throw new Error("Boat not found");
+        }
+
+        const data = await response.json();
+        setBoat(data);
       } catch (error) {
-        console.error("Boat not found");
+        setError(error.message);
+        console.error(error.message);
       }
     };
+
     getBoat();
   }, [id]);
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  if (!boat) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="hero bg-base-200 min-h-screen">
