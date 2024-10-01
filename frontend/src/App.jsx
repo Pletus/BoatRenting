@@ -28,7 +28,7 @@ function App() {
       >
         <Route index element={<Main />} />
         <Route path="/booking" element={<Booking boats={boats} />} />
-        <Route path="/boats/:id" element={<OneBoat />} />
+        <Route path="/boats/:id" element={<OneBoat dateRange={dateRange} selectedLocation={selectedLocation} />} />
       </Route>
     </Routes>
   );

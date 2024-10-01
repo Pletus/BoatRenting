@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-function OneBoat() {
+function OneBoat({ dateRange, selectedLocation }) {
   const { id } = useParams();
   const [boat, setBoat] = useState(null);
   const [error, setError] = useState(null);
-console.log(boat)
+  console.log(boat);
+  console.log(dateRange);
+  console.log(selectedLocation);
 
   useEffect(() => {
     const getBoat = async () => {
@@ -38,17 +40,12 @@ console.log(boat)
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row">
-        <img
-          src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
-          className="max-w-sm rounded-lg shadow-2xl"
-        />
+        <img src={boat[0].imagen} className="max-w-sm rounded-lg shadow-2xl" />
+        <p className="text-5xl font-bold">{selectedLocation}</p>
+        <p className="text-5xl font-bold">from {dateRange.start} till {dateRange.end}</p>
         <div>
           <h1 className="text-5xl font-bold">Box Office News!</h1>
-          <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
-          </p>
+          <p className="py-6">{boat[0].description}</p>
           <button className="btn btn-primary">Get Started</button>
         </div>
       </div>
