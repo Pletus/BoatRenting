@@ -38,15 +38,17 @@ function OneBoat({ dateRange, selectedLocation }) {
   }
 
   return (
-    <div className="hero bg-base-200 min-h-screen">
-      <div className="hero-content flex-col lg:flex-row">
-        <img src={boat[0].imagen} className="max-w-sm rounded-lg shadow-2xl" />
-        <p className="text-5xl font-bold">{selectedLocation}</p>
-        <p className="text-5xl font-bold">from {dateRange.start} till {dateRange.end}</p>
-        <div>
-          <h1 className="text-5xl font-bold">Box Office News!</h1>
+    <div className="hero bg-base-200 min-h-screen p-4">
+      <div className="hero-content md:gap-24 flex-col lg:flex-row">
+        <img src={boat[0].imagen} className="md:max-w-xl 2xl:max-w-5xl input-borders complex-shadow" />
+        <div className="p-12">
+          <h1 className="text-5xl font-bold mt-2 ml-2">{boat[0].type}</h1>
           <p className="py-6">{boat[0].description}</p>
-          <button className="btn btn-primary">Get Started</button>
+          <p className="text-2xl font-bold mt-2">{selectedLocation}</p>
+          <p className="text-xl font-bold mt-2">
+            from {dateRange.start} till {dateRange.end}
+          </p>
+          <button className="btn btn-primary ml-2 mt-4 complex-shadow">Rent this boat</button>
         </div>
       </div>
     </div>

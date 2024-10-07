@@ -45,66 +45,70 @@ function Booking({ boats }) {
   return (
     <div className="min-h-screen grid grid-cols-1 md:grid-cols-4 gap-4 py-3 px-2 md:px-6">
       {/* Left column for filters */}
-      <aside className="md:col-span-1 rounded-lg shadow">
-        <div className="bg-white flex md:flex-col md:p-8 input-borders complex-shadow">
-          <h2 className="text-xl text-center md:pt-2 font-semibold mb-4">
-            Filter Boats
-          </h2>
+      <aside className="md:col-span-1 rounded-lg shadow p-1 md:p-4">
+        <div className="bg-white flex md:flex-col md:p-8 justify-center items-center gap-4 md:gap-2 p-5 md:p-3 input-borders complex-shadow">
+          <div className="">
+            <h2 className="text-xl text-center md:pt-2 font-semibold mb-4">
+              Filter Boats
+            </h2>
 
-          {/* Price Filter */}
-          <div>
-            <h3>Filter by Max Price:</h3>
-            <input
-              type="range"
-              min="0"
-              max="5000"
-              value={price}
-              onChange={(e) => setPrice(Number(e.target.value))}
-              className="w-full"
-            />
-            <span>{price} €</span>
+            {/* Price Filter */}
+            <div>
+              <h3>Filter by Max Price:</h3>
+              <input
+                type="range"
+                min="0"
+                max="5000"
+                value={price}
+                onChange={(e) => setPrice(Number(e.target.value))}
+                className="w-full"
+              />
+              <span>{price} €</span>
+            </div>
+
+            {/* Capacity Filter */}
+            <div>
+              <h3>Filter by Max Capacity:</h3>
+              <input
+                type="range"
+                min="1" // Minimum number of people
+                max="30" // Set a reasonable maximum, adjust as needed
+                value={capacity}
+                onChange={(e) => setCapacity(Number(e.target.value))}
+                className="w-full"
+              />
+              <span>{capacity} Person(s)</span>{" "}
+            </div>
           </div>
 
-          {/* Capacity Filter */}
           <div>
-            <h3>Filter by Max Capacity:</h3>
-            <input
-              type="range"
-              min="1" // Minimum number of people
-              max="30" // Set a reasonable maximum, adjust as needed
-              value={capacity}
-              onChange={(e) => setCapacity(Number(e.target.value))}
-              className="w-full"
-            />
-            <span>{capacity} Person(s)</span>{" "}
-          </div>
+            {/* Motor Power Filter */}
+            <div>
+              <h3>Filter by Max Motor Power (HP):</h3>
+              <input
+                type="range"
+                min="0" // Minimum motor power
+                max="1000" // Maximum motor power
+                value={motorPower}
+                onChange={(e) => setMotorPower(Number(e.target.value))}
+                className="w-full"
+              />
+              <span>{motorPower} HP</span>
+            </div>
 
-          {/* Motor Power Filter */}
-          <div>
-            <h3>Filter by Max Motor Power (HP):</h3>
-            <input
-              type="range"
-              min="0" // Minimum motor power
-              max="1000" // Maximum motor power
-              value={motorPower}
-              onChange={(e) => setMotorPower(Number(e.target.value))}
-              className="w-full"
-            />
-            <span>{motorPower} HP</span>
-          </div>
-
-          {/* Size Filter */}
-          <div>
-            <h3>Filter by Max Size (meters):</h3>
-            <input
-              type="range"
-              min="0"
-              max="30"
-              value={maxSize}
-              onChange={(e) => setMaxSize(Number(e.target.value))}
-              className="w-full"
-            />
-            <span>{maxSize} meters</span>
+            {/* Size Filter */}
+            <div>
+              <h3>Filter by Max Size (meters):</h3>
+              <input
+                type="range"
+                min="0"
+                max="30"
+                value={maxSize}
+                onChange={(e) => setMaxSize(Number(e.target.value))}
+                className="w-full"
+              />
+              <span>{maxSize} meters</span>
+            </div>
           </div>
 
           {/* Sail Filter */}
@@ -123,14 +127,11 @@ function Booking({ boats }) {
       </aside>
 
       {/* Right column for boat cards */}
-      <main className="md:col-span-3">
+      <main className="md:col-span-3 md:p-3">
         {filteredBoats.length > 0 ? (
-          <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredBoats.map((boat, index) => (
-              <li
-                key={index}
-                className="flex flex-col input-borders complex-shadow"
-              >
+              <li key={index} className="flex flex-col">
                 <div className="input-borders complex-shadow bg-base-100 w-full max-w-sm mx-auto flex flex-col h-full">
                   <Link to={`/boats/${boat.id}`}>
                     <figure className="w-full h-72 overflow-hidden">
