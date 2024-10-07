@@ -40,7 +40,7 @@ function OneBoat({ dateRange, selectedLocation }) {
   return (
     <div className="hero bg-base-200 min-h-screen p-4">
       <div className="hero-content md:gap-24 flex-col lg:flex-row">
-        <img src={boat[0].imagen} className="md:max-w-xl 2xl:max-w-5xl input-borders complex-shadow" />
+        <img src={boat[0].imagen} className="md:max-w-lg input-borders complex-shadow" />
         <div className="p-12">
           <h1 className="text-5xl font-bold mt-2 ml-2">{boat[0].type}</h1>
           <p className="py-6">{boat[0].description}</p>
