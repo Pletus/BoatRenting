@@ -12,6 +12,19 @@
     inset -2px -2px 5px #133d87;
 }
 
+.heading {
+  text-align: left;
+  font-weight: 350;
+  font-size: clamp(45px, 4vw, 65px);
+  color: rgb(19, 11, 58);
+}
+.heading-1 {
+  text-align: left;
+  font-weight: 390;
+  font-size: clamp(25px, 4vw, 55px);
+  color: rgb(19, 11, 58);
+}
+
 .input-borders {
   border: 1.2px solid #5991d1;
   border-radius: 3px;
