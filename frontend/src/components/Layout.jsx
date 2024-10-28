@@ -7,7 +7,14 @@ import {
 } from "react-icons/io5";
 import "../App.css";
 
-function Layout({ setBoats, boats, dateRange, setDateRange, selectedLocation, setSelectedLocation}) {
+function Layout({
+  setBoats,
+  boats,
+  dateRange,
+  setDateRange,
+  selectedLocation,
+  setSelectedLocation,
+}) {
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -106,7 +113,7 @@ function Layout({ setBoats, boats, dateRange, setDateRange, selectedLocation, se
 
   return (
     <div className="min-h-screen relative flex flex-col">
-      <nav className="nav top-0 flex lg:grid lg:grid-cols-3 h-20 complex-shadow justify-between items-center lg:justify-items-center lg:content-center px-4 text-white w-full text-xl relative">
+      <nav className="nav top-0 flex lg:grid lg:grid-cols-3 h-20 complex-shadow justify-between items-center lg:justify-items-center lg:content-center px-2 md:px-6 text-white w-full text-xl relative">
         <button onClick={handleMenuToggle} className="lg:hidden text-3xl ml-2">
           {isMenuOpen ? (
             <IoCloseOutline size={24} />
@@ -116,11 +123,11 @@ function Layout({ setBoats, boats, dateRange, setDateRange, selectedLocation, se
         </button>
         <div className="flex justify-self-start place-items-center">
           <ul
-            className={`flex flex-col md:flex-row lg:flex-row text-white items-end lg:items-center transition-transform transform ${
+            className={`flex flex-col md:flex-row lg:flex-row text-white lg:items-center transition-transform transform bg-opacity-90 md:gap-6 ${
               isMenuOpen
-                ? "max-h-full opacity-100 pt-1 pr-3 gap-2 md:gap-4 md:items-center mt-2 md:pl-40 "
-                : "max-h-0 gap-6 2xl:gap-12 opacity-0 "
-            } overflow-hidden lg:overflow-visible lg:opacity-100 lg:max-h-full w-full lg:w-auto`}
+                ? "max-h-auto p-4 nav2 w-full absolute top-20 left-0 nav opacity-100 gap-2 md:gap-4 md:items-center md:pl-16"
+                : "max-h-0 opacity-0"
+            } overflow-hidden lg:overflow-visible lg:opacity-100 lg:max-h-full lg:bg-transparent w-full lg:w-auto`}
           >
             <li>
               <NavLink
@@ -158,7 +165,7 @@ function Layout({ setBoats, boats, dateRange, setDateRange, selectedLocation, se
             alt="Logo"
           />
         </div>
-        <div className="flex gap-8 justify-self-end">
+        <div className="flex gap-1 md:gap-8 justify-self-end">
           <img src="https://via.placeholder.com/40" alt="" />
           <img src="https://via.placeholder.com/40" alt="" />
           <img src="https://via.placeholder.com/40" alt="" />
@@ -306,7 +313,7 @@ function Layout({ setBoats, boats, dateRange, setDateRange, selectedLocation, se
                     </div>
                     <div>
                       <label className="tc font-semibold" htmlFor="Frigate">
-                      Frigate
+                        Frigate
                       </label>
                       <input
                         type="checkbox"

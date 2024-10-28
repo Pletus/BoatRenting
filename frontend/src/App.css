@@ -2,6 +2,14 @@
   background-color: #10255f;
 }
 
+.nav2 {
+  background-color: #10255f;
+  box-shadow: 
+    5px 5px 10px rgba(0, 0, 0, 0.5),
+    inset 0px 2px 4px rgba(0, 0, 0, 0.3),
+    inset 0px -2px 5px #133d87;  
+}
+
 .tc {
   color: #133d87;
 }
@@ -13,15 +21,15 @@
 }
 
 .heading {
-  text-align: left;
+  
   font-weight: 350;
-  font-size: clamp(45px, 4vw, 65px);
+  font-size: clamp(35px, 5vw, 65px);
   color: rgb(19, 11, 58);
 }
 .heading-1 {
-  text-align: left;
+  
   font-weight: 370;
-  font-size: clamp(25px, 4vw, 55px);
+  font-size: clamp(30px, 5vw, 55px);
   color: rgb(19, 11, 58);
 }
 

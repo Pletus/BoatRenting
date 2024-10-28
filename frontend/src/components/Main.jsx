@@ -21,9 +21,9 @@ function Main({ reload }) {
       style={{ backgroundImage: `url(${hero})` }}
     >
       <div className="container mx-auto flex items-center justify-center md:pr-36">
-        <div className="md:w-2/4 flex flex-col items-center justify-center gap-4 text-center">
+        <div className="flex flex-col items-center justify-center gap-4 text-center pb-32 md:pb-0">
           <h1 className="heading md:pr-24" data-aos="zoom-in">
-            Chart Your Course,
+            Chart your course,
           </h1>
           <h1
             className="heading md:pr-12"
@@ -31,15 +31,15 @@ function Main({ reload }) {
             data-aos-offset="60"
             data-aos-easing="ease-in-sine"
           >
-            Sail Your Dream,
+            Sail your dream,
           </h1>
           <p
-            className="heading-1 pl-12"
+            className="heading-1 md:pl-12"
             data-aos="zoom-in"
             data-aos-offset="60"
             data-aos-easing="ease-in-sine"
           >
-            Create Lasting Memories
+            Create lasting memories
           </p>
         </div>
       </div>
