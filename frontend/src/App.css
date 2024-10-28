@@ -20,7 +20,7 @@
 }
 .heading-1 {
   text-align: left;
-  font-weight: 390;
+  font-weight: 370;
   font-size: clamp(25px, 4vw, 55px);
   color: rgb(19, 11, 58);
 }
