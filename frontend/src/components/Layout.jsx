@@ -173,7 +173,7 @@ function Layout({
         {isFormVisible && (
           <div
             id="bookingForm"
-            className="absolute top-20 md:left-24 mt-2 pt-12 px-10 bg-white text-black p-4 input-borders complex-shadow"
+            className="absolute top-20 md:left-24 mt-6 pt-12 px-10 bg-white text-black p-4 input-borders complex-shadow"
             style={{ zIndex: 100 }}
           >
             <button
@@ -286,7 +286,7 @@ function Layout({
                   Choose the type of vessel
                 </button>
                 {isOpen && (
-                  <div className="dropdown-content">
+                  <div className="dropdown-content flex flex-col md:flex-row">
                     <div>
                       <label className="tc font-semibold" htmlFor="Boat">
                         Boat
@@ -328,7 +328,7 @@ function Layout({
                         className="tc font-semibold"
                         htmlFor="Sailing Vessel"
                       >
-                        Sailing Vessel
+                        Vessel
                       </label>
                       <input
                         type="checkbox"

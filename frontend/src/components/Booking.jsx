@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Booking({ boats }) {
-  // States for filtering boats
   const [price, setPrice] = useState("");
   const [capacity, setCapacity] = useState("");
   const [motorPower, setMotorPower] = useState("");
@@ -10,27 +9,21 @@ function Booking({ boats }) {
   const [maxSize, setMaxSize] = useState("");
   const [hasSail, setHasSail] = useState(false);
 
-  // Function to filter boats based on input values
   const filterBoats = () => {
     return boats.filter((boat) => {
-      // Price filter using single 'price' state as max price
       const isPriceInRange = price === "" || boat.price <= price;
 
-      // Capacity filter using the 'capacity' state
       const isCapacityInRange = capacity === "" || boat.plazas <= capacity;
 
-      // Motor power filter using the 'motorPower' state
       const isMotorPowerInRange =
         motorPower === "" || boat.potencia <= motorPower;
 
-      // Size filter using the 'minSize' and 'maxSize' states
       const isSizeInRange =
         (minSize === "" || boat.size >= minSize) &&
         (maxSize === "" || boat.size <= maxSize);
 
       const isSailMatch = !hasSail || boat.vela === hasSail;
 
-      // Return true if the boat matches all conditions
       return (
         isPriceInRange &&
         isCapacityInRange &&
@@ -44,15 +37,12 @@ function Booking({ boats }) {
 
   return (
     <div className="min-h-screen grid grid-cols-1 md:grid-cols-4 gap-4 py-3 px-2 md:px-6">
-      {/* Left column for filters */}
       <aside className="md:col-span-1 rounded-lg shadow p-1 md:p-4">
         <div className="bg-white flex md:flex-col md:p-8 justify-center items-center gap-4 md:gap-2 p-5 md:p-3 input-borders complex-shadow">
           <div className="">
             <h2 className="text-xl text-center md:pt-2 font-semibold mb-4">
               Filter Boats
             </h2>
-
-            {/* Price Filter */}
             <div>
               <h3>Filter by Max Price:</h3>
               <input
@@ -65,14 +55,12 @@ function Booking({ boats }) {
               />
               <span>{price} €</span>
             </div>
-
-            {/* Capacity Filter */}
             <div>
               <h3>Filter by Max Capacity:</h3>
               <input
                 type="range"
-                min="1" // Minimum number of people
-                max="30" // Set a reasonable maximum, adjust as needed
+                min="1"
+                max="30"
                 value={capacity}
                 onChange={(e) => setCapacity(Number(e.target.value))}
                 className="w-full"
@@ -80,23 +68,19 @@ function Booking({ boats }) {
               <span>{capacity} Person(s)</span>{" "}
             </div>
           </div>
-
           <div>
-            {/* Motor Power Filter */}
             <div>
               <h3>Filter by Max Motor Power (HP):</h3>
               <input
                 type="range"
-                min="0" // Minimum motor power
-                max="1000" // Maximum motor power
+                min="0" 
+                max="1000" 
                 value={motorPower}
                 onChange={(e) => setMotorPower(Number(e.target.value))}
                 className="w-full"
               />
               <span>{motorPower} HP</span>
             </div>
-
-            {/* Size Filter */}
             <div>
               <h3>Filter by Max Size (meters):</h3>
               <input
@@ -110,8 +94,6 @@ function Booking({ boats }) {
               <span>{maxSize} meters</span>
             </div>
           </div>
-
-          {/* Sail Filter */}
           <div className="mb-4">
             <label className="flex items-center space-x-2">
               <input
@@ -125,8 +107,6 @@ function Booking({ boats }) {
           </div>
         </div>
       </aside>
-
-      {/* Right column for boat cards */}
       <main className="md:col-span-3 md:p-3">
         {filteredBoats.length > 0 ? (
           <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
