@@ -11,6 +11,7 @@ function OneBoat({ dateRange, selectedLocation }) {
   const [boat, setBoat] = useState(null);
   const [error, setError] = useState(null);
   const [showForm, setShowForm] = useState(false);
+  const [finalPrice, setFinalPrice] = useState(0);
   const [formData, setFormData] = useState({
     name: "",
     lastName: "",
@@ -18,14 +19,43 @@ function OneBoat({ dateRange, selectedLocation }) {
     phone: "",
   });
 
+  const price = () => {
+    // Verifica que `boat` y `boat.price` existen y son válidos
+    if (!boat || typeof boat.price !== 'number' || boat.price <= 0) {
+      console.warn("Invalid boat price:", boat ? boat.price : "Boat data missing");
+      return 0;
+    }
+  
+    // Verifica que `dateRange.start` y `dateRange.end` existen y son fechas válidas
+    const startDate = new Date(dateRange.start);
+    const endDate = new Date(dateRange.end);
+  
+    if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
+      console.warn("Invalid dates in dateRange:", dateRange);
+      return 0;
+    }
+  
+    // Calcula la diferencia en días
+    const differenceInTime = endDate - startDate;
+    const numberOfDays = Math.ceil(differenceInTime / (1000 * 60 * 60 * 24));
+  
+    console.log("Number of days:", numberOfDays, "Boat price:", boat.price);
+  
+    return numberOfDays * boat.price;
+  };
+  
+
   const onSubmit = async (event) => {
     event.preventDefault();
-    const form = event.target;
-    const formData = new FormData(form);
+    const formElement = event.target;
+    const formDataInstance = new FormData(formElement); // Cambié el nombre aquí para evitar conflictos
 
-    formData.append("access_key", "35e8db4e-05e1-4283-8202-21162477206f");
+    formDataInstance.append(
+      "access_key",
+      "35e8db4e-05e1-4283-8202-21162477206f"
+    );
 
-    const object = Object.fromEntries(formData);
+    const object = Object.fromEntries(formDataInstance);
     const json = JSON.stringify(object);
 
     console.log("Submitting the following data:", object);
@@ -43,11 +73,11 @@ function OneBoat({ dateRange, selectedLocation }) {
 
       if (result.success) {
         Swal.fire({
-          title: "Sucess!",
+          title: "Success!",
           text: "I have received an email with all your travel information. We will get back to you soon with the confirmation! Thank you!",
           icon: "success",
         });
-        form.reset();
+        formElement.reset();
       } else {
         console.error("Error", result);
       }
@@ -75,6 +105,13 @@ function OneBoat({ dateRange, selectedLocation }) {
 
     getBoat();
   }, [id]);
+
+  useEffect(() => {
+    if (boat) {
+      const calculatedPrice = price();
+      setFinalPrice(calculatedPrice);
+    }
+  }, [dateRange, boat]); // Cambié la dependencia a solo `boat`
 
   if (error) {
     return <div>{error}</div>;
@@ -110,16 +147,16 @@ function OneBoat({ dateRange, selectedLocation }) {
 
   return (
     <div className="hero bg-base-200 min-h-screen flex flex-col">
-      <div className="hero-content md:gap-24 flex flex-col lg:flex-row items-start py-12">
+      <div className="hero-content md:gap-24 flex flex-col lg:flex-row items-start md:py-12 py-6">
         <img
           src={boat[0].imagen}
           className="md:max-w-lg input-borders complex-shadow"
         />
-        <div className="p-6 bg-gray-100 rounded-lg shadow-lg">
-          <p className="mb-6 pl-2 text-lg text-gray-700">
+        <div className="p-4 bg-gray-100 rounded-lg shadow-lg">
+          <p className="mb-4 pl-2 text-lg text-gray-700">
             {boat[0].description}
           </p>
-          <div className="bg-white rounded-lg p-6 shadow-md mb-6 transition-transform transform hover:-translate-y-2 hover:shadow-xl">
+          <div className="bg-white rounded-lg p-4 shadow-md mb-4 transition-transform transform hover:-translate-y-2 hover:shadow-xl">
             <h3 className="text-xl font-semibold text-blue-600 mb-4">
               Boat Details
             </h3>
@@ -133,23 +170,28 @@ function OneBoat({ dateRange, selectedLocation }) {
               <p className="text-gray-800">
                 <strong>Maximum Number of Passengers:</strong> {boat[0].plazas}
               </p>
+              <p className="text-gray-800">
+                <strong>Final Price</strong> {finalPrice}
+              </p>
             </div>
           </div>
-          <div className="bg-white rounded-lg p-6 shadow-md mb-6 transition-transform transform hover:-translate-y-2 hover:shadow-xl">
+          <div className="bg-white rounded-lg p-4 shadow-md mb-4 transition-transform transform hover:-translate-y-2 hover:shadow-xl">
             <h3 className="text-xl font-semibold text-blue-600 mb-4">
-              Location Details
+              Booking Details
             </h3>
-            <p className="text-2xl font-bold text-gray-800">
-              Location:{" "}
-              <span className="text-blue-600">{selectedLocation}</span>
-            </p>
-            <p className="text-xl font-bold text-gray-800">
-              From: <span className="text-blue-600">{dateRange.start}</span>{" "}
-              till <span className="text-blue-600">{dateRange.end}</span>
-            </p>
+            <div className="flex flex-col md:flex-row gap-2 md:gap-12">
+              <p className="text-xl font-semibold text-gray-800">
+                Location:{" "}
+                <span className="text-blue-600">{selectedLocation}</span>
+              </p>
+              <p className="text-xl font-semibold text-gray-800">
+                From: <span className="text-blue-600">{dateRange.start}</span>{" "}
+                till <span className="text-blue-600">{dateRange.end}</span>
+              </p>
+            </div>
           </div>
           <button
-            className="btn btn-primary mt-4 bg-blue-500 text-white font-semibold py-2 px-6 rounded-md hover:bg-blue-600 transition-colors shadow-md"
+            className="btn btn-primary mt-2 bg-blue-500 text-white font-semibold py-2 px-6 rounded-md hover:bg-blue-600 transition-colors shadow-md"
             onClick={() => setShowForm(true)}
           >
             Rent this Boat
