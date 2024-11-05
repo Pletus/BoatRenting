@@ -11,7 +11,6 @@ function OneBoat({ dateRange, selectedLocation }) {
   const [boat, setBoat] = useState(null);
   const [error, setError] = useState(null);
   const [showForm, setShowForm] = useState(false);
-  const [finalPrice, setFinalPrice] = useState(0);
   const [formData, setFormData] = useState({
     name: "",
     lastName: "",
@@ -19,36 +18,25 @@ function OneBoat({ dateRange, selectedLocation }) {
     phone: "",
   });
 
-  const price = () => {
-    // Verifica que `boat` y `boat.price` existen y son válidos
-    if (!boat || typeof boat.price !== 'number' || boat.price <= 0) {
-      console.warn("Invalid boat price:", boat ? boat.price : "Boat data missing");
-      return 0;
-    }
-  
-    // Verifica que `dateRange.start` y `dateRange.end` existen y son fechas válidas
+  console.log(dateRange);
+  console.log(getDaysInRange(dateRange));
+
+  function getDaysInRange(dateRange) {
     const startDate = new Date(dateRange.start);
     const endDate = new Date(dateRange.end);
-  
-    if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
-      console.warn("Invalid dates in dateRange:", dateRange);
-      return 0;
-    }
-  
-    // Calcula la diferencia en días
-    const differenceInTime = endDate - startDate;
-    const numberOfDays = Math.ceil(differenceInTime / (1000 * 60 * 60 * 24));
-  
-    console.log("Number of days:", numberOfDays, "Boat price:", boat.price);
-  
-    return numberOfDays * boat.price;
-  };
-  
+
+    const diffInMs = endDate - startDate;
+
+    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+    // const plusPrice = diffInDays * boat[0].price;
+
+    return diffInDays;
+  }
 
   const onSubmit = async (event) => {
     event.preventDefault();
     const formElement = event.target;
-    const formDataInstance = new FormData(formElement); // Cambié el nombre aquí para evitar conflictos
+    const formDataInstance = new FormData(formElement);
 
     formDataInstance.append(
       "access_key",
@@ -56,6 +44,13 @@ function OneBoat({ dateRange, selectedLocation }) {
     );
 
     const object = Object.fromEntries(formDataInstance);
+
+    object.selectedLocation = selectedLocation;
+    object.dateRangeStart = dateRange.start;
+    object.dateRangeEnd = dateRange.end;
+    object.finalPrice = boat[0].price * getDaysInRange(dateRange);
+    object.boatType = boat[0].type;
+
     const json = JSON.stringify(object);
 
     console.log("Submitting the following data:", object);
@@ -105,13 +100,6 @@ function OneBoat({ dateRange, selectedLocation }) {
 
     getBoat();
   }, [id]);
-
-  useEffect(() => {
-    if (boat) {
-      const calculatedPrice = price();
-      setFinalPrice(calculatedPrice);
-    }
-  }, [dateRange, boat]); // Cambié la dependencia a solo `boat`
 
   if (error) {
     return <div>{error}</div>;
@@ -170,9 +158,6 @@ function OneBoat({ dateRange, selectedLocation }) {
               <p className="text-gray-800">
                 <strong>Maximum Number of Passengers:</strong> {boat[0].plazas}
               </p>
-              <p className="text-gray-800">
-                <strong>Final Price</strong> {finalPrice}
-              </p>
             </div>
           </div>
           <div className="bg-white rounded-lg p-4 shadow-md mb-4 transition-transform transform hover:-translate-y-2 hover:shadow-xl">
@@ -187,6 +172,10 @@ function OneBoat({ dateRange, selectedLocation }) {
               <p className="text-xl font-semibold text-gray-800">
                 From: <span className="text-blue-600">{dateRange.start}</span>{" "}
                 till <span className="text-blue-600">{dateRange.end}</span>
+              </p>
+              <p className="text-gray-800">
+                <strong>Final Price:</strong>{" "}
+                {boat[0].price * getDaysInRange(dateRange)}
               </p>
             </div>
           </div>
