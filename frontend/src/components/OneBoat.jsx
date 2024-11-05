@@ -135,13 +135,13 @@ function OneBoat({ dateRange, selectedLocation }) {
 
   return (
     <div className="hero bg-base-200 min-h-screen flex flex-col">
-      <div className="hero-content md:gap-24 flex flex-col lg:flex-row items-start md:py-12 py-6">
+      <div className="p-4 md:px-24 gap-4 md:gap-12 flex flex-col lg:flex-row items-start md:py-12 py-6">
         <img
           src={boat[0].imagen}
           className="md:max-w-lg input-borders complex-shadow"
         />
         <div className="p-4 bg-gray-100 rounded-lg shadow-lg">
-          <p className="mb-4 pl-2 text-lg text-gray-700">
+          <p className="mb-6 mt-4 pl-2 text-lg text-gray-700">
             {boat[0].description}
           </p>
           <div className="bg-white rounded-lg p-4 shadow-md mb-4 transition-transform transform hover:-translate-y-2 hover:shadow-xl">

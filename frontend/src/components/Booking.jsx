@@ -36,8 +36,8 @@ function Booking({ boats }) {
   const filteredBoats = filterBoats();
 
   return (
-    <div className="min-h-screen grid grid-cols-1 md:grid-cols-4 gap-4 py-3 px-2 md:px-6">
-      <aside className="md:col-span-1 rounded-lg shadow p-1 md:p-4">
+    <div className="min-h-screen grid grid-cols-1 md:grid-cols-4 pt-2 md:pr-24 md:pl-4">
+      <aside className="md:col-span-1 rounded-lg shadow p-2">
         <div className="bg-white flex md:flex-col md:p-8 justify-center items-center gap-4 md:gap-2 p-5 md:p-3 input-borders complex-shadow">
           <div className="">
             <h2 className="text-xl text-center md:pt-2 font-semibold mb-4">
@@ -107,9 +107,9 @@ function Booking({ boats }) {
           </div>
         </div>
       </aside>
-      <main className="md:col-span-3 md:p-3">
+      <main className="md:col-span-3 p-2">
         {filteredBoats.length > 0 ? (
-          <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4">
             {filteredBoats.map((boat, index) => (
               <li key={index} className="flex flex-col">
                 <div className="input-borders complex-shadow bg-base-100 w-full max-w-sm mx-auto flex flex-col h-full">

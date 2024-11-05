@@ -86,6 +86,7 @@ function Layout({
       setBoats(response);
       navigate("/booking");
       setIsFormVisible(false);
+      setIsMenuOpen(false);
     } catch (error) {
       console.error("Error fetching boats:", error);
     }
