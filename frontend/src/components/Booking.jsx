@@ -131,7 +131,7 @@ function Booking({ boats }) {
                     </h2>
                     <div className="card-actions gap-2 justify-end mt-4">
                       <div className="hover:bg-sky-700 hover:ring-sky-700 hover:text-white input-borders p-1 px-2">
-                        {boat.potencia} HP
+                        {boat.potencia || 50 } HP
                       </div>
                       <div className="hover:bg-sky-700 hover:ring-sky-700 hover:text-white input-borders p-1 px-2">
                         {boat.size} M

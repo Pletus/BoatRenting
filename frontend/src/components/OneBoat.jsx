@@ -150,7 +150,7 @@ function OneBoat({ dateRange, selectedLocation }) {
             </h3>
             <div className="flex flex-col">
               <p className="text-gray-800">
-                <strong>Horsepower:</strong> {boat[0].potencia}
+                <strong>Horsepower:</strong> {boat[0].potencia || 50}
               </p>
               <p className="text-gray-800">
                 <strong>Meters of Length:</strong> {boat[0].size}
@@ -164,18 +164,22 @@ function OneBoat({ dateRange, selectedLocation }) {
             <h3 className="text-xl font-semibold text-blue-600 mb-4">
               Booking Details
             </h3>
-            <div className="flex flex-col md:flex-row gap-2 md:gap-12">
-              <p className="text-xl font-semibold text-gray-800">
-                Location:{" "}
-                <span className="text-blue-600">{selectedLocation}</span>
+            <div className="flex flex-col md:flex-row gap-2 md:gap-4">
+              <p className="text-gray-800">
+                <strong>Location: </strong>
+                <span className="text-gray-700 text-lg">{selectedLocation}</span>
               </p>
-              <p className="text-xl font-semibold text-gray-800">
-                From: <span className="text-blue-600">{dateRange.start}</span>{" "}
-                till <span className="text-blue-600">{dateRange.end}</span>
+              <p className="text-gray-800 flex flex-row gap-1">
+                <strong>from: </strong>{" "}
+                <span className="text-gray-700 text-lg">{dateRange.start}</span>{" "}
+                <br />
+                <br />{" "}
+                <strong>till </strong>{" "}
+                <span className="text-gray-700 text-lg">{dateRange.end}</span>
               </p>
               <p className="text-gray-800">
                 <strong>Final Price:</strong>{" "}
-                {boat[0].price * getDaysInRange(dateRange)}
+                <span className="text-gray-700 text-lg">{boat[0].price * getDaysInRange(dateRange)} €</span>
               </p>
             </div>
           </div>
@@ -192,10 +196,10 @@ function OneBoat({ dateRange, selectedLocation }) {
           onSubmit={onSubmit}
           className="p-6 flex flex-wrap items-center justify-center gap-6  bg-gray-100 shadow-lg rounded-md"
         >
-          <h2 className="text-2xl w-full text-center text-blue-500 font-bold drop-shadow-xl mb-4">
+          <h2 className="text-2xl w-full text-center font-bold text-blue-700 drop-shadow-xl mb-4">
             Payment
           </h2>
-          <p className="text-xl w-full text-center text-blue-500 font-semibold drop-shadow-xl mb-4">
+          <p className="text-xl w-full text-center font-semibold text-blue-700 mb-4">
             Enter your data and we will send you an email with the confirmation
             of your trip.
           </p>
