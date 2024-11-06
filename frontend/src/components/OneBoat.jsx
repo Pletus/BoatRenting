@@ -134,8 +134,8 @@ function OneBoat({ dateRange, selectedLocation }) {
   };
 
   return (
-    <div className="hero bg-base-200 min-h-screen flex flex-col">
-      <div className="p-4 md:px-24 gap-4 md:gap-12 flex flex-col lg:flex-row items-start md:py-12 py-6">
+    <div className="hero p-4 md:px-24 bg-base-200 min-h-screen flex flex-col">
+      <div className="gap-4 md:gap-12 flex flex-col lg:flex-row items-start md:py-12 py-6">
         <img
           src={boat[0].imagen}
           className="md:max-w-lg input-borders complex-shadow"
@@ -167,19 +167,22 @@ function OneBoat({ dateRange, selectedLocation }) {
             <div className="flex flex-col md:flex-row gap-2 md:gap-4">
               <p className="text-gray-800">
                 <strong>Location: </strong>
-                <span className="text-gray-700 text-lg">{selectedLocation}</span>
+                <span className="text-gray-700 text-lg">
+                  {selectedLocation}
+                </span>
               </p>
               <p className="text-gray-800 flex flex-row gap-1">
                 <strong>from: </strong>{" "}
                 <span className="text-gray-700 text-lg">{dateRange.start}</span>{" "}
                 <br />
-                <br />{" "}
-                <strong>till </strong>{" "}
+                <br /> <strong>till </strong>{" "}
                 <span className="text-gray-700 text-lg">{dateRange.end}</span>
               </p>
               <p className="text-gray-800">
                 <strong>Final Price:</strong>{" "}
-                <span className="text-gray-700 text-lg">{boat[0].price * getDaysInRange(dateRange)} €</span>
+                <span className="text-gray-700 text-lg">
+                  {boat[0].price * (getDaysInRange(dateRange) + 1)} €
+                </span>
               </p>
             </div>
           </div>
@@ -194,7 +197,7 @@ function OneBoat({ dateRange, selectedLocation }) {
       {showForm && (
         <form
           onSubmit={onSubmit}
-          className="p-6 flex flex-wrap items-center justify-center gap-6  bg-gray-100 shadow-lg rounded-md"
+          className="p-6 md:pb-16 flex flex-wrap items-center justify-center gap-6 md:gap-12  bg-gray-100 shadow-lg rounded-md"
         >
           <h2 className="text-2xl w-full text-center font-bold text-blue-700 drop-shadow-xl mb-4">
             Payment
@@ -249,43 +252,6 @@ function OneBoat({ dateRange, selectedLocation }) {
                 required
               />
               <img src={phone} alt="phone icon" className="w-6 h-6" />
-            </div>
-          </div>
-          <div className="flex flex-col items-center gap-4">
-            <h3 className="text-lg font-semibold text-blue-700 whitespace-nowrap">
-              Contact Preference
-            </h3>
-            <label className="flex items-center gap-2">
-              <input
-                className="custom-checkbox"
-                name="democheckbox"
-                type="checkbox"
-                value="email"
-              />
-              <span>Reply by email</span>
-            </label>
-            <label className="flex items-center gap-2">
-              <input
-                className="custom-checkbox"
-                name="democheckbox"
-                type="checkbox"
-                value="phone"
-              />
-              <span>Reply by phone</span>
-            </label>
-          </div>
-          <div className="flex items-center gap-2">
-            <label htmlFor="message" className="font-medium whitespace-nowrap">
-              Message
-            </label>
-            <div className="input-group flex items-center gap-2">
-              <textarea
-                name="message"
-                className="field p-2 border rounded w-60"
-                placeholder="optional"
-                required
-              ></textarea>
-              <img src={paragraph} alt="paragraph icon" className="w-6 h-6" />
             </div>
           </div>
           <button
