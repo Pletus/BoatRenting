@@ -6,6 +6,10 @@ import {
   IoMailOpenOutline,
 } from "react-icons/io5";
 import "../App.css";
+import logo from "../assets/sailCompassLogo.png";
+import instagram from "../assets/instagram.svg";
+import facebook from "../assets/facebook.svg";
+import youtube from "../assets/youtube.svg";
 
 function Layout({
   setBoats,
@@ -114,7 +118,7 @@ function Layout({
 
   return (
     <div className="min-h-screen relative flex flex-col">
-      <nav className="nav top-0 flex lg:grid lg:grid-cols-3 h-20 complex-shadow justify-between items-center lg:justify-items-center lg:content-center px-2 md:px-6 text-white w-full text-xl relative">
+      <nav className="nav py-11 top-0 flex lg:grid lg:grid-cols-3 h-20 complex-shadow justify-between items-center lg:justify-items-center lg:content-center px-2 md:px-8 text-white w-full text-xl relative">
         <button onClick={handleMenuToggle} className="lg:hidden text-3xl ml-2">
           {isMenuOpen ? (
             <IoCloseOutline size={24} />
@@ -124,7 +128,7 @@ function Layout({
         </button>
         <div className="flex justify-self-start place-items-center">
           <ul
-            className={`flex flex-col md:flex-row lg:flex-row text-white lg:items-center transition-transform transform bg-opacity-90 md:gap-6 ${
+            className={`flex flex-col md:flex-row lg:flex-row text-white lg:items-center transition-transform transform bg-opacity-90 md:gap-14 ${
               isMenuOpen
                 ? "max-h-auto p-4 nav2 w-full absolute top-20 left-0 nav opacity-100 gap-2 md:gap-4 md:items-center md:pl-16"
                 : "max-h-0 opacity-0"
@@ -159,17 +163,31 @@ function Layout({
             </li>
           </ul>
         </div>
-        <div className="flex-grow text-center">
-          <img
-            className="inline-block"
-            src="https://via.placeholder.com/40"
-            alt="Logo"
-          />
+        <div className="flex-grow justify-center items-center">
+          <img className="inline-block w-40 h-40 mt-2" src={logo} alt="Logo" />
         </div>
         <div className="flex gap-1 md:gap-8 justify-self-end">
-          <img src="https://via.placeholder.com/40" alt="" />
-          <img src="https://via.placeholder.com/40" alt="" />
-          <img src="https://via.placeholder.com/40" alt="" />
+          <a href="https://www.linkedin.com/in/yagopb/">
+            <img
+              src={instagram}
+              className="w-12 h-12 transform transition-transform duration-200 md:hover:scale-125"
+              alt="instragram"
+            />
+          </a>
+          <a href="https://github.com/pletus">
+            <img
+              src={facebook}
+              className="w-12 h-12 transform transition-transform duration-200 md:hover:scale-125"
+              alt="facebook"
+            />
+          </a>
+          <a href="https://www.youtube.com/watch?v=ObagRWhqBj0&ab_channel=ScenicMusic">
+            <img
+              src={youtube}
+              className="w-12 h-12 transform transition-transform duration-200 md:hover:scale-125"
+              alt="youtube"
+            />
+          </a>
         </div>
         {isFormVisible && (
           <div
